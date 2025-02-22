@@ -44,7 +44,7 @@ public class Main {
                 {"Sunday", "Relax at home"}
         };
 
-        Human son = new Human("Gabriel", "Davidson", 2000, 55, dog, mother, father, schedule);
+        Human son = new Human("Gabriel", "Davidson", 2000, 55, dog, schedule);
 
         System.out.println(son);
         son.greetPet();
