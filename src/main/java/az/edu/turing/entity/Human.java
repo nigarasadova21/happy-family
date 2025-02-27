@@ -17,6 +17,7 @@ public class Human {
     private Map<DayOfWeek, String> schedule;
 
 
+
     {
         System.out.println("Human created");
     }

@@ -13,6 +13,7 @@ public enum Species {
         this.hasFur = hasFur;
     }
 
+
     @Override
     public String toString() {
         return "Species{" +

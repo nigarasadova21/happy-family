@@ -38,6 +38,7 @@ public class Family {
     }
 
 
+
     public Family(Human mother, Human father) {
         this.father = father;
         this.mother = mother;

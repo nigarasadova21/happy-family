@@ -16,6 +16,7 @@ public class Pet {
     public Pet() {
     }
 
+
     public Pet(Species species, String nickname) {
         this.species = species;
         this.nickname = nickname;
