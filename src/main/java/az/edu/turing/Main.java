@@ -1,53 +1,69 @@
 package az.edu.turing;
 
+import az.edu.turing.entity.Family;
 import az.edu.turing.entity.Human;
 import az.edu.turing.entity.Pet;
+import az.edu.turing.enums.DayOfWeek;
+import az.edu.turing.enums.Species;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        Pet dog = new Pet("Dog", "Linda", 3, 60, new String[]{"eating", "playing"});
+
+        Map<DayOfWeek, String> schedule = new HashMap<>();
+        schedule.put(DayOfWeek.MONDAY, "Go to work");
+        schedule.put(DayOfWeek.TUESDAY, "Go to the gym");
+        schedule.put(DayOfWeek.WEDNESDAY, "Go to the cinema");
+        schedule.put(DayOfWeek.THURSDAY, "Go to the park");
+        schedule.put(DayOfWeek.FRIDAY, "Go to the restaurant");
+        schedule.put(DayOfWeek.SATURDAY, "Go to the swimming pool");
+        schedule.put(DayOfWeek.SUNDAY, "Go to the zoo");
+
+
+
+        Human father = new Human("John", "Smith", 1978, 130, schedule);
+        Human mother = new Human("Anna", "Smith", 1980, 120, schedule);
+        Human child = new Human("Mike", "Smith", 2005, 110, schedule);
+        Family family = new Family(mother, father);
+        Pet dog = new Pet(Species.DOG, "Buddy", 3, 75, new String[]{"playing", "eating"});
+        Pet cat = new Pet(Species.CAT, "Tom", 5, 50, new String[]{"sleeping", "eating"});
+        Pet fish = new Pet(Species.FISH, "Nemo", 1, 25, new String[]{"swimming", "eating"});
+        family.setPet(dog);
+        System.out.println("Initial family size: " + family.countFamily());
+        family.addChild(child);
+        System.out.println("After adding child: " + family.countFamily());
+        family.deleteChild(child);
+        System.out.println("After deleting child: " + family.countFamily());
+        System.out.println("Family details: " + family);
+
+        System.out.println("Animal species details:");
+        for (Species species : Species.values()) {
+            System.out.println(species);
+        }
+
+
+        System.out.println("Pet details: " + dog);
+        dog.eat();
         dog.respond();
         dog.foul();
-        dog.eat();
 
-        Pet cat = new Pet("Cat", "Tosu", 7, 80, new String[]{"Sleeping", "running"});
+        System.out.println("Pet details: " + cat);
+        cat.eat();
         cat.respond();
         cat.foul();
-        cat.eat();
+        System.out.println("\n");
 
-        Pet duck = new Pet("Duck", "Donald Duck");
-        duck.respond();
-        duck.foul();
-        duck.eat();
+        System.out.println("Pet details: " + fish);
+        fish.eat();
+        fish.respond();
+        fish.foul();
+        System.out.println("\n");
 
-        Pet chicken = new Pet();
-        chicken.setSpecies("Chicken");
-        chicken.setNickname("Chilli");
-        chicken.setAge(3);
-        chicken.setTrickLevel(10);
-        chicken.setHabits(new String[]{"Eating", "Running"});
-
-        chicken.respond();
-        chicken.foul();
-        chicken.eat();
-
-
-        Human father = new Human("Robert", "Davidson", 1974);
-        Human mother = new Human("Cristina", "Davidson", 1989);
-        String[][] schedule = {
-                {"Monday", "Go to the gym"},
-                {"Tuesday", "Read a book"},
-                {"Wednesday", "Watch a movie"},
-                {"Thursday", "Learn Java"},
-                {"Friday", "Meet friends"},
-                {"Saturday", "Go hiking"},
-                {"Sunday", "Relax at home"}
-        };
-
-        Human son = new Human("Gabriel", "Davidson", 2000, 55, dog, schedule);
-
-        System.out.println(son);
-        son.greetPet();
-        son.describePet();
+        System.out.println("Human interactions:");
+        father.greetPet();
+        mother.describePet();
+        mother.feedPet(true);
     }
 }

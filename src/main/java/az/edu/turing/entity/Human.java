@@ -1,7 +1,10 @@
 package az.edu.turing.entity;
 
-import java.util.Arrays;
+import az.edu.turing.enums.DayOfWeek;
+
+import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
 
 public class Human {
 
@@ -11,12 +14,15 @@ public class Human {
     private int iq;
     private Pet pet;
     private Family family;
-    private String[][] schedule;
+    private Map<DayOfWeek, String> schedule;
+
 
 
     {
         System.out.println("Human created");
     }
+
+
     public Family getFamily() {
         return family;
     }
@@ -25,7 +31,7 @@ public class Human {
         this.family = family;
     }
 
-    public Human() {
+    public Human(String mike, String smith, int i, int i1, Map<DayOfWeek, String> schedule) {
     }
 
     public Human(String name, String surname, int year) {
@@ -33,20 +39,31 @@ public class Human {
         this.surname = surname;
         this.year = year;
     }
-    public Human(String name, String surname, int year, int iq, Pet pet, String[][] schedule) {
+
+    public Human(String name, String surname, int year, int iq, Pet pet, Family family, Map<DayOfWeek, String> schedule) {
         this.name = name;
         this.surname = surname;
         this.year = year;
         this.iq = iq;
         this.pet = pet;
+        this.family = family;
         this.schedule = schedule;
     }
 
     public void greetPet() {
+        if (family == null || family.getPet() == null) {
+            System.out.println("No pet assigned to this family.");
+            return;
+        }
         System.out.println("Hello, " + pet.getNickname());
     }
 
     public void describePet() {
+        if (family == null || family.getPet() == null) {
+            System.out.println("No pet assigned to this family.");
+            return;
+        }
+
         if (pet.getTrickLevel() > 50) {
             System.out.println("I have an " + pet.getSpecies() + " is " + pet.getAge() + " years old, he is very sly");
         } else {
@@ -95,15 +112,31 @@ public class Human {
     }
 
 
+    public void feedPet(boolean isTimeToFeed) {
+        if (family != null && family.getPet() != null) {
+            Pet pet = family.getPet();
+            if (isTimeToFeed) {
+                System.out.println("Feeding " + pet.getNickname());
+            } else {
+                Random random = new Random();
+                int randomValue = random.nextInt(100);
+                if (pet.getTrickLevel() > randomValue) {
+                    System.out.println("Feeding " + pet.getNickname());
+                } else {
+                    System.out.println(pet.getNickname() + " is not hungry now.");
+                }
+            }
+        } else {
+            System.out.println("No pet found in the family.");
+        }
+    }
 
 
-
-
-    public String[][] getSchedule() {
+    public Map<DayOfWeek, String> getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(String[][] schedule) {
+    public void setSchedule(Map<DayOfWeek, String> schedule) {
         this.schedule = schedule;
     }
 
@@ -112,12 +145,12 @@ public class Human {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Human human = (Human) o;
-        return year == human.year && iq == human.iq && Objects.equals(name, human.name) && Objects.equals(surname, human.surname) && Objects.equals(pet, human.pet)  && Objects.deepEquals(schedule, human.schedule);
+        return year == human.year && iq == human.iq && Objects.equals(name, human.name) && Objects.equals(surname, human.surname) && Objects.equals(pet, human.pet) && Objects.deepEquals(schedule, human.schedule);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surname, year, iq, pet , Arrays.deepHashCode(schedule));
+        return Objects.hash(name, surname, year, iq, pet, family, schedule);
     }
 
     @Override

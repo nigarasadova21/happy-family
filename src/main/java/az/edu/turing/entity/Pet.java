@@ -1,11 +1,13 @@
 package az.edu.turing.entity;
 
+import az.edu.turing.enums.Species;
+
 import java.util.Arrays;
 import java.util.Objects;
 
 public class Pet {
 
-    private String species;
+    private Species species;
     private String nickname;
     private int age;
     private int trickLevel;
@@ -14,18 +16,21 @@ public class Pet {
     public Pet() {
     }
 
-    public Pet(String species, String nickname) {
+
+    public Pet(Species species, String nickname) {
         this.species = species;
         this.nickname = nickname;
     }
 
-    public Pet(String species, String nickname, int age, int trickLevel, String[] habits) {
+    public Pet(Species species, String nickname, int age, int trickLevel, String[] habits) {
         this.species = species;
         this.nickname = nickname;
         this.age = age;
         this.trickLevel = trickLevel;
         this.habits = habits;
     }
+
+
 
     public void eat() {
         System.out.println("I'm eating");
@@ -39,11 +44,11 @@ public class Pet {
         System.out.println("I need to cover it up");
     }
 
-    public String getSpecies() {
+    public Species getSpecies() {
         return species;
     }
 
-    public void setSpecies(String species) {
+    public void setSpecies(Species species) {
         this.species = species;
     }
 
